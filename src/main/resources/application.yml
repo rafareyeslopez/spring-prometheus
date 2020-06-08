@@ -1,0 +1,39 @@
+spring:
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: pass
+    # url: jdbc:mysql://localhost:3306/my_schema
+    url: jdbc:mysql://mysql:3306/my_schema
+    username: user
+    
+    
+  jpa:
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: false
+    hibernate:
+      ddl-auto: update 
+      #ddl-auto: create-drop      
+
+  rabbitmq:
+      host: rabbit
+
+  batch:
+    job:
+      enabled: false   
+         
+  main:
+    allow-bean-definition-overriding: true
+  
+    
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+    
+
+      

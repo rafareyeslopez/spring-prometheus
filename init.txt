@@ -1,0 +1,19 @@
+
+
+docker run -d  -p 5672:5672 -p 15672:15672 --name rabbit rabbitmq:management-alpine
+
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=rootpass -e MYSQL_DATABASE=my_schema -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -p 3306:3306 -d mysql
+
+
+docker run -d --name prometheus -p 9090:9090 -v $PWD/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus --config.file=/etc/prometheus/prometheus.yml
+
+docker run -d --name grafana -p 3000:3000 grafana/grafana
+
+
+./mvnw package -DskipTests
+
+docker build -t spring-batch .
+
+ docker run -d -p 8080:8080 --name spring-batch spring-batch
+
+./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=spring-batch
